@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:radioapp/api_call.dart';
+import 'package:radioapp/models/category_model.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
+
+  List<CategoryModel> categories = [];
+
+  void _getCategories() {
+    categories = CategoryModel.getCategories();
+  }
 
   @override
   Widget build(BuildContext context) {
+    _getCategories();
     return Scaffold(
       appBar: appBar(),
       backgroundColor: Colors.white,
@@ -32,13 +41,20 @@ class HomePage extends StatelessWidget {
               ),
               Container(
                 height: 150,
-                color: Colors.green,
-                // child: ListView.builder(
-                //   itemBuilder: (context, index) {
-                //     return Container();
-                //   },
-                // ),
-              )
+                child: ListView.separated(
+                  itemCount: categories.length,
+                  scrollDirection: Axis.horizontal,
+                  separatorBuilder: (context, index) => SizedBox(width: 25,),
+                  itemBuilder: (context, index) {
+                    return Container(
+                      width: 100,
+                      decoration: BoxDecoration(
+                        color: categories[index].boxColor.withOpacity(0.3)
+                      ),
+                    );
+                  },
+                ),
+              ),
             ],
           )
         ],
