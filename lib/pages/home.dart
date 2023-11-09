@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:radioapp/api_call.dart';
 import 'package:radioapp/models/category_model.dart';
 
 class HomePage extends StatelessWidget {
@@ -20,14 +19,14 @@ class HomePage extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
+          const SizedBox(
             height: 40,
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 20),
+              const Padding(
+                padding: EdgeInsets.only(left: 20),
                 child: Text(
                   'Kanaler',
                   style: TextStyle(
@@ -36,15 +35,15 @@ class HomePage extends StatelessWidget {
                       fontWeight: FontWeight.w600),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
-              Container(
+              SizedBox(
                 height: 150,
                 child: ListView.separated(
                   itemCount: categories.length,
                   scrollDirection: Axis.horizontal,
-                  separatorBuilder: (context, index) => SizedBox(width: 25,),
+                  separatorBuilder: (context, index) => const SizedBox(width: 25,),
                   itemBuilder: (context, index) {
                     return Container(
                       width: 100,
@@ -64,7 +63,7 @@ class HomePage extends StatelessWidget {
 
   AppBar appBar() {
     return AppBar(
-      title: Text('SR Radio Tablå'),
+      title: const Text('SR Radio Tablå'),
       centerTitle: true,
     );
   }
