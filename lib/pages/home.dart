@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:radioapp/api_call.dart';
 import 'package:radioapp/models/category_model.dart';
-import 'package:radioapp/pages/widgets/schedule_card.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
@@ -27,10 +26,10 @@ class HomePage extends StatelessWidget {
           ),
           _categories(),
           const SizedBox(height: 10,),
-           Column(
+           const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [ 
-              const Padding(padding: EdgeInsets.only(left: 20),
+              Padding(padding: EdgeInsets.only(left: 20),
               child: Text('Dagens Tablå',
               style: TextStyle(
                 color: Colors.black,
@@ -82,29 +81,10 @@ class HomePage extends StatelessWidget {
                   return Container(
                     width: 100,
                     decoration: BoxDecoration(
-                      // color: categories[index].boxColor.withOpacity(0.3),
                       image: DecorationImage(
                         image: NetworkImage(categories[index].iconPath)),
                       borderRadius: BorderRadius.circular(16)
                     ),
-                    // child: 
-                    // Column(
-                    //   mainAxisAlignment: MainAxisAlignment.center,
-                    //   children: [
-                    //     // Container(
-                    //     //   width: 90,
-                    //     //   height: 90,
-                    //     //   decoration: const BoxDecoration(
-                    //     //     color: Colors.white,
-                    //     //     shape: BoxShape.circle
-                    //     //     ),
-                    //     //   child: Padding(
-                    //     //     padding: const EdgeInsets.all(5.0),
-                    //     //     child: Image.network(categories[index].iconPath)
-                    //     //   ) ,
-                    //     // )
-                    //   ],
-                    // ),
                   );
                 },
               ),

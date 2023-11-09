@@ -54,7 +54,7 @@ class ScheduleCard extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 19,
                   color: Colors.white,
-                  backgroundColor: Colors.black38
+                  backgroundColor: Colors.black54
                 ),
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
@@ -63,26 +63,27 @@ class ScheduleCard extends StatelessWidget {
             ),
           ),
           Align(
+            alignment: Alignment.bottomLeft,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  padding: EdgeInsets.all(5),
-                  margin: EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(5),
+                  margin: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
                     color: Colors.black.withOpacity(0.4),
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.access_alarm_outlined,
                         color: Colors.yellow,
                         size: 18,
                       ),
-                      SizedBox(width: 7),
+                      const SizedBox(width: 7),
                       Text(start,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.white
                       ),
                       ),
@@ -90,22 +91,22 @@ class ScheduleCard extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.all(5),
-                  margin: EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(5),
+                  margin: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
                     color: Colors.black.withOpacity(0.4),
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.schedule,
                         color: Colors.yellow,
                         size: 18,
                       ),
-                      SizedBox(width: 7),
+                      const SizedBox(width: 7),
                       Text(end,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.white
                       ),),
                     ],
@@ -113,7 +114,6 @@ class ScheduleCard extends StatelessWidget {
                 )
               ],
             ),
-            alignment: Alignment.bottomLeft,
           ),
         ],
       ),
