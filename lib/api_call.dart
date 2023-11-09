@@ -2,16 +2,29 @@ import 'dart:developer';
 import 'package:radioapp/pages/widgets/schedule_card.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
+import 'package:intl/intl.dart';
 
 class ApiCall extends StatelessWidget {
+    final String apiUrl; // Add a parameter for the API URL
+
+  ApiCall({required this.apiUrl}); // Constructor to accept the URL
+
   Future<List<dynamic>> fetchAPI() async {
     Dio dio = Dio();
 
-    var response = await dio.get(
-        'https://api.sr.se/v2/scheduledepisodes?channelid=132&format=json');
+    var response = await dio.get(apiUrl); // Use the provided URL
+    
     log(response.data['schedule'].toString());
 
     return response.data['schedule'];
+  }
+
+  String convertToTime(String dateStr) {
+    int unixTimestamp = int.parse(dateStr.split('(')[1].split(')')[0]);
+    DateTime dateTime =
+        DateTime.fromMillisecondsSinceEpoch(unixTimestamp, isUtc: true);
+    String formattedTime = DateFormat.Hm().format(dateTime);
+    return formattedTime;
   }
 
   @override
@@ -23,19 +36,13 @@ class ApiCall extends StatelessWidget {
             return ListView.builder(
                 itemCount: snapshot.data!.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return 
-                  // Card(
-                  //     child: ListTile(
-                  //   title: Text('${snapshot.data![index]['title']}'),
-                  //   subtitle: Text('${snapshot.data![index]['description']}'),
-                  // ));
-
-                  ScheduleCard(
-                    description: '${snapshot.data![index]['description']}',
-                    end: '${snapshot.data![index]['endtimeutc']}',
-                    start: '${snapshot.data![index]['starttimeutc']}',
-                    imageurl: '${snapshot.data![index]['imageurl']}');
-                 });
+                  return ScheduleCard(
+                      description: '${snapshot.data![index]['title']}',
+                      end: convertToTime(snapshot.data![index]['endtimeutc']),
+                      start:
+                          convertToTime(snapshot.data![index]['starttimeutc']),
+                      imageurl: '${snapshot.data![index]['imageurl']}');
+                });
           } else {
             return const Center(child: CircularProgressIndicator());
           }

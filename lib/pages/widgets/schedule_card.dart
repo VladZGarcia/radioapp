@@ -26,7 +26,7 @@ class ScheduleCard extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.6),
-            offset: Offset(
+            offset: const Offset(
               0.0,
               10.0,
             ),
@@ -46,20 +46,21 @@ class ScheduleCard extends StatelessWidget {
       child: Stack(
         children: [
           Align(
+            alignment: Alignment.center,
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 5.0),
+              padding: const EdgeInsets.symmetric(horizontal: 5.0),
               child: Text(
                 description,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 19,
-                  color: Colors.white
+                  color: Colors.white,
+                  backgroundColor: Colors.black38
                 ),
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
                 textAlign: TextAlign.center,
               ),
             ),
-            alignment: Alignment.center,
           ),
           Align(
             child: Row(

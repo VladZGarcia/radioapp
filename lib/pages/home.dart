@@ -23,15 +23,15 @@ class HomePage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(
-            height: 40,
+            height: 20,
           ),
           _categories(),
-          const SizedBox(height: 40,),
-          const Column(
+          const SizedBox(height: 10,),
+           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [ 
-              Padding(padding: EdgeInsets.only(left: 20),
-              child: Text('Tablå',
+              const Padding(padding: EdgeInsets.only(left: 20),
+              child: Text('Dagens Tablå',
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 18,
@@ -39,8 +39,10 @@ class HomePage extends StatelessWidget {
               ),
               ),
               ),
-              
-              //  ScheduleCard(description: 'description', end: 'end', start: 'start', imageurl: 'https://static-cdn.sr.se/images/5380/a7898d6c-786f-4fcb-b68e-c5f56f4b3bef.jpg'),
+              SizedBox(
+                height: 430,
+                child: ApiCall(apiUrl: 'https://api.sr.se/v2/scheduledepisodes?channelid=132&format=json&size=100')
+                ),
              ]
           ),
         ],
@@ -66,7 +68,7 @@ class HomePage extends StatelessWidget {
             const SizedBox(
               height: 15,
             ),
-            Container(
+            SizedBox(
               height: 120,
               child: ListView.separated(
                 itemCount: categories.length,
@@ -80,27 +82,29 @@ class HomePage extends StatelessWidget {
                   return Container(
                     width: 100,
                     decoration: BoxDecoration(
-                      color: categories[index].boxColor.withOpacity(0.3),
+                      // color: categories[index].boxColor.withOpacity(0.3),
+                      image: DecorationImage(
+                        image: NetworkImage(categories[index].iconPath)),
                       borderRadius: BorderRadius.circular(16)
                     ),
-                    child: 
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: 90,
-                          height: 90,
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                            shape: BoxShape.circle
-                            ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: Image.network(categories[index].iconPath)
-                          ) ,
-                        )
-                      ],
-                    ),
+                    // child: 
+                    // Column(
+                    //   mainAxisAlignment: MainAxisAlignment.center,
+                    //   children: [
+                    //     // Container(
+                    //     //   width: 90,
+                    //     //   height: 90,
+                    //     //   decoration: const BoxDecoration(
+                    //     //     color: Colors.white,
+                    //     //     shape: BoxShape.circle
+                    //     //     ),
+                    //     //   child: Padding(
+                    //     //     padding: const EdgeInsets.all(5.0),
+                    //     //     child: Image.network(categories[index].iconPath)
+                    //     //   ) ,
+                    //     // )
+                    //   ],
+                    // ),
                   );
                 },
               ),
