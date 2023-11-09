@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:radioapp/api_call.dart';
 import 'package:radioapp/models/category_model.dart';
+import 'package:radioapp/pages/widgets/schedule_card.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
@@ -17,54 +18,104 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: appBar(),
       backgroundColor: Colors.white,
-      body: Column(
+      body:  
+      Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-            height: 40,
+          const SizedBox(
+            height: 20,
           ),
-          Column(
+          _categories(),
+          const SizedBox(height: 10,),
+           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 20),
-                child: Text(
-                  'Kanaler',
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600),
-                ),
+            children: [ 
+              const Padding(padding: EdgeInsets.only(left: 20),
+              child: Text('Dagens Tablå',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 18,
+                fontWeight: FontWeight.w600
+              ),
+              ),
               ),
               SizedBox(
-                height: 15,
-              ),
-              Container(
-                height: 150,
-                child: ListView.separated(
-                  itemCount: categories.length,
-                  scrollDirection: Axis.horizontal,
-                  separatorBuilder: (context, index) => SizedBox(width: 25,),
-                  itemBuilder: (context, index) {
-                    return Container(
-                      width: 100,
-                      decoration: BoxDecoration(
-                        color: categories[index].boxColor.withOpacity(0.3)
-                      ),
-                    );
-                  },
+                height: 430,
+                child: ApiCall(apiUrl: 'https://api.sr.se/v2/scheduledepisodes?channelid=132&format=json&size=100')
                 ),
-              ),
-            ],
-          )
+             ]
+          ),
         ],
+        
       ),
     );
   }
 
+  Column _categories() {
+    return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Padding(
+              padding: EdgeInsets.only(left: 20),
+              child: Text(
+                'Kanaler',
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600),
+              ),
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            SizedBox(
+              height: 120,
+              child: ListView.separated(
+                itemCount: categories.length,
+                scrollDirection: Axis.horizontal,
+                padding: const EdgeInsets.only(
+                  left: 20,
+                  right: 20
+                ),
+                separatorBuilder: (context, index) => const SizedBox(width: 25,),
+                itemBuilder: (context, index) {
+                  return Container(
+                    width: 100,
+                    decoration: BoxDecoration(
+                      // color: categories[index].boxColor.withOpacity(0.3),
+                      image: DecorationImage(
+                        image: NetworkImage(categories[index].iconPath)),
+                      borderRadius: BorderRadius.circular(16)
+                    ),
+                    // child: 
+                    // Column(
+                    //   mainAxisAlignment: MainAxisAlignment.center,
+                    //   children: [
+                    //     // Container(
+                    //     //   width: 90,
+                    //     //   height: 90,
+                    //     //   decoration: const BoxDecoration(
+                    //     //     color: Colors.white,
+                    //     //     shape: BoxShape.circle
+                    //     //     ),
+                    //     //   child: Padding(
+                    //     //     padding: const EdgeInsets.all(5.0),
+                    //     //     child: Image.network(categories[index].iconPath)
+                    //     //   ) ,
+                    //     // )
+                    //   ],
+                    // ),
+                  );
+                },
+              ),
+            ),
+          ],
+        );
+  }
+
   AppBar appBar() {
     return AppBar(
-      title: Text('SR Radio Tablå'),
+      title: const Text('SR Radio Tablå'),
       centerTitle: true,
     );
   }
